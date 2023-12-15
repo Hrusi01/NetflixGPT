@@ -1,12 +1,6 @@
 import './App.css';
-
+import Body from './components/Body';
 function App() {
-  return (
-    <div className="text-xl">
-      <h1>Hello Netflix, I want your movies</h1>
-
-    </div>
-  );
+  return <Body />
 }
-
 export default App;
