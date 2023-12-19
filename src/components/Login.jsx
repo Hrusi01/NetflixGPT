@@ -5,6 +5,7 @@ import { checkValidData } from "../utils/validate";
 import { useRef } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { addUser } from "../utils/userSlice";
 const Login = () => {
     const [isSignIn, setSignIn] = useState(true);
     const [errMsg, setErrMsg] = useState(null);
@@ -37,8 +38,16 @@ const Login = () => {
                         displayName: name.current,
                         photoURL: "https://avatars.githubusercontent.com/u/88570040?v=4"
                     }).then(() => {
-                        // Profile updated!
-                        navigate("/browse")
+                        const { uid, email, displayName, photoURL } = auth.currentUser;
+                        dispatchEvent(
+                            addUser({
+                                uid: uid,
+                                email: email,
+                                displayName: displayName,
+                                photoURL: photoURL,
+                            })
+                        )
+                        navigate("/browse");
                     }).catch((error) => {
                         // An error occur
                         setErrMsg(error.msg);
