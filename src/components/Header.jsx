@@ -1,19 +1,35 @@
 import userIcon from "../img/userIcon.jpg"
 import { auth } from "../utils/firebase";
-import { signOut } from "firebase/auth";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux'
+import { addUser, removeUser } from "../utils/userSlice";
 const Header = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const handleSignOut = () => {
         signOut(auth).then(() => {
             // Sign-out successful.
-            navigate("/");
         }).catch((error) => {
             // An error happened.
             navigate("/error");
         });
 
     }
+    useEffect(() => {
+        //a kind of event listener
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const { uid, email, displayName } = user;
+                dispatch(addUser({ user: uid, email, displayName: displayName }));
+            } else {
+                // User is signed out
+                dispatch(removeUser());
+            }
+        });
+
+    }, []);
     return (
         <div className="absolute h-36 justify-between items-center flex w-screen px-4 py-2 bg-gradient-to-b from-black z-10">
             <img className="w-44 mx-8"
