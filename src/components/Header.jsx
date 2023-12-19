@@ -19,7 +19,7 @@ const Header = () => {
     }
     useEffect(() => {
         //a kind of event listener
-        onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 const { uid, email, displayName } = user;
                 dispatch(addUser({ user: uid, email, displayName: displayName }));
@@ -28,6 +28,9 @@ const Header = () => {
                 dispatch(removeUser());
             }
         });
+
+        // unsbscribe when component unmount
+        return () => unsubscribe();
 
     }, []);
     return (
