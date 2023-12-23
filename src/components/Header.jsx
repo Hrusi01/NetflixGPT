@@ -10,7 +10,7 @@ const Header = () => {
     const navigate = useNavigate();
     const handleSignOut = () => {
         signOut(auth).then(() => {
-            // Sign-out successful.
+
         }).catch((error) => {
             // An error happened.
             navigate("/error");
@@ -23,12 +23,13 @@ const Header = () => {
             if (user) {
                 const { uid, email, displayName } = user;
                 dispatch(addUser({ user: uid, email, displayName: displayName }));
+                navigate("/browse")
             } else {
                 // User is signed out
                 dispatch(removeUser());
+                navigate("/");
             }
         });
-
         // unsbscribe when component unmount
         return () => unsubscribe();
 

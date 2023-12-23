@@ -49,7 +49,6 @@ const Login = () => {
                         // An error occur
                         setErrMsg(error.msg);
                     });
-                    console.log(user);
                     //push this user info to store
                 })
                 .catch((error) => {
