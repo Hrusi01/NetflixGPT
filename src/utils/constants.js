@@ -8,7 +8,7 @@ export const API_OPTIONS = {
     method: 'GET',
     headers: {
         accept: 'application/json',
-        Authorization: 'Bearer' + process.env.REACR_APP_API_OPTIONS
+        Authorization: 'Bearer' + process.env.REACT_APP_API_OPTIONS
     }
 
 }
