@@ -1,10 +1,10 @@
-export const language = {
+const lang = {
     en: {
         search: "Search",
         searchPlaceholder: "What would you like to watch today?"
     },
     hindi: {
-        seach: "खोज",
+        search: "खोज",
         searchPlaceholder: "आज आप क्या देखना चाहेंगे?"
     },
     spanish: {
@@ -12,6 +12,7 @@ export const language = {
         searchPlaceholder: "¿Qué te gustaría ver hoy?"
     }
 }
+export default lang
 
 export const supported_language = [
     { identifier: "en", name: "English" },
